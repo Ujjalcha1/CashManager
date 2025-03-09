@@ -1,18 +1,31 @@
 import {StatusBar} from "react-native";
 import React from "react";
 import {SafeAreaView} from "react-native-safe-area-context";
+import Header from "./Header";
+import {Colors} from "../constant";
 
 type ContainerProps = {
   children: React.ReactNode;
+  style?: object;
 };
 
-const Container = ({children}: ContainerProps) => {
+import {StyleSheet} from "react-native";
+
+const Container = ({children, style}: ContainerProps) => {
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="dark-content" />
+      <Header />
       {children}
     </SafeAreaView>
   );
 };
 
 export default Container;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
+});
