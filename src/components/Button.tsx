@@ -4,11 +4,12 @@ import {Colors, OpenSansBold} from "../constant";
 
 type ButtonProps = {
   title: string;
+  onPress: () => void;
 };
 
-const Button = ({title}: ButtonProps) => {
+const Button = ({title, onPress}: ButtonProps) => {
   return (
-    <TouchableOpacity activeOpacity={0.5} style={styles.box}>
+    <TouchableOpacity activeOpacity={0.5} style={styles.box} onPress={onPress}>
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );

@@ -6,6 +6,7 @@ import AuthScreen from "../pages/Auth/AuthScreen";
 const Stack = createNativeStackNavigator();
 
 const index = () => {
+  console.log("van");
   return (
     <NavigationContainer>
       <Stack.Navigator
