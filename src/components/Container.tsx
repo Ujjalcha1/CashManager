@@ -14,7 +14,7 @@ import {StyleSheet} from "react-native";
 const Container = ({children, style}: ContainerProps) => {
   return (
     <SafeAreaView style={[styles.container, style]}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
       <Header />
       {children}
     </SafeAreaView>

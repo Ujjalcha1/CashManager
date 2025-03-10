@@ -10,7 +10,6 @@ type ChipProps = {
 };
 
 const Chip = ({label, value, selected, onSelected}: ChipProps) => {
-  console.log(selected);
   return (
     <TouchableOpacity
       activeOpacity={0.5}

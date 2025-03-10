@@ -1,16 +1,28 @@
-import {StyleSheet, Text, TouchableOpacity} from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
 import React from "react";
 import {Colors, OpenSansBold} from "../constant";
 
 type ButtonProps = {
   title: string;
   onPress: () => void;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 };
 
-const Button = ({title, onPress}: ButtonProps) => {
+const Button = ({title, onPress, style, textStyle}: ButtonProps) => {
   return (
-    <TouchableOpacity activeOpacity={0.5} style={styles.box} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      style={[styles.box, style]}
+      onPress={onPress}>
+      <Text style={[styles.buttonText, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -25,6 +37,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     marginVertical: 30,
+    justifyContent: "center",
   },
   buttonText: {
     ...OpenSansBold,

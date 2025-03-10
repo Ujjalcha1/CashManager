@@ -1,5 +1,5 @@
-import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import React, {useState} from "react";
+import {FlatList, StyleSheet, Text, View} from "react-native";
 import Container from "../../components/Container";
 import FilterOptions from "../../components/FilterOptions";
 import {
@@ -7,9 +7,129 @@ import {
   OpenSansBold,
   OpenSansRegular,
   OpenSansSemiBold,
+  size,
 } from "../../constant";
+import Button from "../../components/Button";
 
 const HomeScreen = () => {
+  const [data, setData] = useState([
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+    {
+      date: "Sun, 09 Mar 2025 11:12 PM",
+      cashIn: 60,
+      cashOut: 20,
+    },
+  ]);
+
   return (
     <Container style={{backgroundColor: Colors.lightWhite}}>
       <FilterOptions />
@@ -26,15 +146,65 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      <View style={styles.dataRow}>
-        <View style={styles.left}>
-          <Text style={styles.value}>Sun, 09 Mar 2025 11:12 PM</Text>
+      <FlatList
+        data={data}
+        renderItem={() => {
+          return (
+            <View style={styles.dataRow}>
+              <View style={styles.left}>
+                <Text style={styles.value}>Sun, 09 Mar 2025 11:12 PM</Text>
+              </View>
+              <View style={styles.middle}>
+                <Text style={[OpenSansSemiBold, styles.fontSize13]}>60</Text>
+              </View>
+              <View style={styles.middle}>
+                <Text
+                  style={[
+                    OpenSansSemiBold,
+                    styles.fontSize13,
+                    {color: Colors.error},
+                  ]}>
+                  20
+                </Text>
+              </View>
+            </View>
+          );
+        }}
+      />
+
+      <View style={styles.flexGrow} />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Cash in"
+          onPress={() => {}}
+          style={[styles.button, {backgroundColor: Colors.success}]}
+          textStyle={styles.buttonText}
+        />
+        <Button
+          title="Cash out"
+          onPress={() => {}}
+          style={[styles.button, {backgroundColor: Colors.error}]}
+          textStyle={styles.buttonText}
+        />
+      </View>
+      <View style={styles.summaryContainer}>
+        <View style={styles.summaryBox}>
+          <Text style={styles.summaryText}>Total Cash In</Text>
+          <Text style={styles.summaryValue}>
+            {data.reduce((acc, item) => acc + item.cashIn, 0)}
+          </Text>
         </View>
-        <View style={styles.middle}>
-          <Text style={[OpenSansSemiBold, styles.fontSize13]}>60</Text>
+        <View style={styles.summaryBox}>
+          <Text style={styles.summaryText}>Total Cash Out</Text>
+          <Text style={[styles.summaryValue, {color: Colors.error}]}>
+            {data.reduce((acc, item) => acc + item.cashOut, 0)}
+          </Text>
         </View>
-        <View style={styles.middle}>
-          <Text style={[OpenSansSemiBold, styles.fontSize13]}>20</Text>
+        <View style={styles.summaryBox}>
+          <Text style={styles.summaryText}>Balance</Text>
+          <Text style={styles.summaryValue}>
+            {data.reduce((acc, item) => acc + item.cashIn - item.cashOut, 0)}
+          </Text>
         </View>
       </View>
     </Container>
@@ -72,4 +242,42 @@ const styles = StyleSheet.create({
   left: {width: "60%", alignItems: "flex-start"},
   middle: {width: "20%", alignItems: "center"},
   fontSize13: {fontSize: 13},
+  buttonContainer: {
+    padding: 10,
+    width: size.window_width,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+  },
+  flexGrow: {
+    flexGrow: 1,
+  },
+  buttonText: {
+    color: Colors.white,
+    fontSize: 15,
+  },
+  button: {
+    width: size.window_width / 2.5,
+    marginVertical: 0,
+  },
+  summaryContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: Colors.white,
+  },
+  summaryBox: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    width: size.window_width / 3,
+  },
+  summaryText: {
+    ...OpenSansRegular,
+    fontSize: 14,
+  },
+  summaryValue: {
+    ...OpenSansBold,
+    fontSize: 14,
+  },
 });

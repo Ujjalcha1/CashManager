@@ -1,4 +1,4 @@
-import {StyleProp} from "react-native";
+import {Dimensions, StyleProp} from "react-native";
 import {RootStackParamList} from "../navigation/navigationTypes";
 
 // Colors
@@ -15,6 +15,14 @@ export const Colors = {
   warning: "#FFA500",
   info: "#0000FF",
   light: "#F3F3F3",
+};
+
+//Window
+export const size = {
+  window_height: Dimensions.get("window").height,
+  window_width: Dimensions.get("window").width,
+  screen_height: Dimensions.get("screen").height,
+  screen_width: Dimensions.get("screen").width,
 };
 
 //Imagaes
@@ -281,9 +289,9 @@ export const OpenSansExtraBoldItalic: StyleProp<any> = {
 export const FilterOptions = [
   {label: "All", value: 0},
   {label: "Daily", value: 1},
-  {label: "Weekly", value: 3},
-  {label: "Monthly", value: 4},
-  {label: "Yearly", value: 5},
+  {label: "Weekly", value: 2},
+  {label: "Monthly", value: 3},
+  {label: "Yearly", value: 4},
 ];
 
 //Screens
