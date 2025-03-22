@@ -15,6 +15,7 @@ export const Colors = {
   warning: "#FFA500",
   info: "#0000FF",
   light: "#F3F3F3",
+  link: "#0000FF",
 };
 
 //Window
@@ -298,4 +299,29 @@ export const FilterOptions = [
 export const Screens: {[key in keyof RootStackParamList]: key} = {
   Home: "Home",
   Auth: "Auth",
+  Cash: "Cash",
 };
+
+//Keyboard numbers
+export const KeyboardNumbers = [
+  {value: "7", label: "7", icon: null},
+  {value: "8", label: "8", icon: null},
+  {value: "9", label: "9", icon: null},
+  {value: "/", label: "/", icon: null},
+  {value: "4", label: "4", icon: null},
+  {value: "5", label: "5", icon: null},
+  {value: "6", label: "6", icon: null},
+  {value: "*", label: "*", icon: null},
+  {value: "1", label: "1", icon: null},
+  {value: "2", label: "2", icon: null},
+  {value: "3", label: "3", icon: null},
+  {value: "-", label: "-", icon: null},
+  {value: ",", label: ",", icon: null},
+  {value: "0", label: "0", icon: null},
+  {value: ".", label: ".", icon: null},
+  {value: "+", label: "+", icon: null},
+  {value: "00", label: "00", icon: null},
+  {value: "000", label: "000", icon: null},
+  {value: "c", label: "c", icon: null},
+  {value: "x", label: null, icon: "backspace"},
+];

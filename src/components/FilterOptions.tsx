@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, {useState} from "react";
 import {
   ScrollView,
@@ -8,64 +9,25 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {Colors, OpenSansBold, FilterOptions as options} from "../constant";
+import {changeLabel, onNextOnPrevious} from "../utlis";
 import Chip from "./Chip";
-import moment from "moment";
 
 const FilterOptions = () => {
+  const today = moment().format("MMMM Do YYYY");
   const [selected, setSelected] = useState<number>(0);
-  const [label, setLabel] = useState<string>(
-    options.find(item => item.value === selected)?.label || "",
-  );
+  const [label, setLabel] = useState<string>("All");
 
   const handleSelected = (value: number) => {
-    if (value === 1) {
-      setSelected(value);
-      setLabel("Today");
-    } else {
-      setLabel(options.find(item => item.value === value)?.label || "");
-      setSelected(value);
-    }
+    setLabel(changeLabel(value));
+    setSelected(value);
   };
 
   const onNext = () => {
-    if (selected === 1) {
-      setLabel(
-        moment(label, "MMMM Do YYYY").add(1, "days").format("MMMM Do YYYY"),
-      );
-    } else if (selected === 2) {
-      setLabel(
-        moment(label, "MMMM Do YYYY").add(1, "weeks").format("MMMM Do YYYY"),
-      );
-    } else if (selected === 3) {
-      setLabel(moment(label, "MMMM YYYY").add(1, "months").format("MMMM YYYY"));
-    } else if (selected === 4) {
-      setLabel(moment(label, "YYYY").add(1, "years").format("YYYY"));
-    }
+    setLabel(onNextOnPrevious(selected, label, "next") || "All");
   };
 
   const onPrevious = () => {
-    console.log("object", selected);
-    if (selected === 1) {
-      setLabel(
-        moment(label, "MMMM Do YYYY")
-          .subtract(1, "days")
-          .format("MMMM Do YYYY"),
-      );
-    } else if (selected === 2) {
-      const firstDayOfWeek = moment(label, "MMMM YYYY")
-        .startOf("week")
-        .format("YYYY-MM-DD");
-      const lastDayOfWeek = moment(label, "MMMM YYYY")
-        .endOf("week")
-        .format("YYYY-MM-DD");
-      setLabel(`${firstDayOfWeek} - ${lastDayOfWeek}`);
-    } else if (selected === 3) {
-      setLabel(
-        moment(label, "MMMM YYYY").subtract(1, "months").format("MMMM YYYY"),
-      );
-    } else if (selected === 4) {
-      setLabel(moment(label, "YYYY").subtract(1, "years").format("YYYY"));
-    }
+    setLabel(onNextOnPrevious(selected, label, "previous") || "All");
   };
 
   return (
@@ -95,7 +57,7 @@ const FilterOptions = () => {
         ) : (
           <View style={styles.placeholder} />
         )}
-        <Text style={styles.title}>{label}</Text>
+        <Text style={styles.title}>{today === label ? "Today" : label}</Text>
         {selected !== 0 ? (
           <TouchableOpacity
             activeOpacity={0.5}

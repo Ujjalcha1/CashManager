@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, ViewStyle} from "react-native";
 import React from "react";
 import {Colors, OpenSansBold, OpenSansRegular} from "../constant";
 
@@ -7,15 +7,31 @@ type ChipProps = {
   value: number;
   selected: number;
   onSelected: (value: number) => void;
+  activeChipStyle?: ViewStyle;
+  inActiveChipStyle?: ViewStyle;
 };
 
-const Chip = ({label, value, selected, onSelected}: ChipProps) => {
+const Chip = ({
+  label,
+  value,
+  selected,
+  onSelected,
+  activeChipStyle,
+  inActiveChipStyle,
+}: ChipProps) => {
   return (
     <TouchableOpacity
       activeOpacity={0.5}
-      style={selected === value ? styles.activeChip : styles.chip}
+      style={
+        selected === value ? [styles.activeChip, activeChipStyle] : styles.chip
+      }
       onPress={() => onSelected(value)}>
-      <Text style={selected === value ? styles.activelabel : styles.label}>
+      <Text
+        style={
+          selected === value
+            ? [styles.activelabel, inActiveChipStyle]
+            : styles.label
+        }>
         {label}
       </Text>
     </TouchableOpacity>

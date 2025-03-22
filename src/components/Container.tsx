@@ -7,15 +7,16 @@ import {Colors} from "../constant";
 type ContainerProps = {
   children: React.ReactNode;
   style?: object;
+  headerTitle?: string;
 };
 
 import {StyleSheet} from "react-native";
 
-const Container = ({children, style}: ContainerProps) => {
+const Container = ({children, style, headerTitle}: ContainerProps) => {
   return (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
-      <Header />
+      <Header title={headerTitle} />
       {children}
     </SafeAreaView>
   );

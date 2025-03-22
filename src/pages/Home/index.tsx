@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {FlatList, StyleSheet, Text, View} from "react-native";
+import Button from "../../components/Button";
 import Container from "../../components/Container";
 import FilterOptions from "../../components/FilterOptions";
 import {
@@ -7,11 +8,12 @@ import {
   OpenSansBold,
   OpenSansRegular,
   OpenSansSemiBold,
+  RobotoMediumItalic,
   size,
 } from "../../constant";
-import Button from "../../components/Button";
+import {HomeScreenType} from "../../navigation/navigationTypes";
 
-const HomeScreen = () => {
+const HomeScreen = (props: HomeScreenType) => {
   const [data, setData] = useState([
     {
       date: "Sun, 09 Mar 2025 11:12 PM",
@@ -148,10 +150,13 @@ const HomeScreen = () => {
 
       <FlatList
         data={data}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={() => {
           return (
             <View style={styles.dataRow}>
               <View style={styles.left}>
+                <Text style={styles.name}>Ujjal Chatterjee</Text>
                 <Text style={styles.value}>Sun, 09 Mar 2025 11:12 PM</Text>
               </View>
               <View style={styles.middle}>
@@ -176,13 +181,17 @@ const HomeScreen = () => {
       <View style={styles.buttonContainer}>
         <Button
           title="Cash in"
-          onPress={() => {}}
+          onPress={() => {
+            props.navigation.navigate("Cash", {title: "Cash in", type: 0});
+          }}
           style={[styles.button, {backgroundColor: Colors.success}]}
           textStyle={styles.buttonText}
         />
         <Button
           title="Cash out"
-          onPress={() => {}}
+          onPress={() => {
+            props.navigation.navigate("Cash", {title: "Cash out", type: 1});
+          }}
           style={[styles.button, {backgroundColor: Colors.error}]}
           textStyle={styles.buttonText}
         />
@@ -279,5 +288,10 @@ const styles = StyleSheet.create({
   summaryValue: {
     ...OpenSansBold,
     fontSize: 14,
+  },
+  name: {
+    ...RobotoMediumItalic,
+    color: Colors.link,
+    fontSize: 12,
   },
 });
