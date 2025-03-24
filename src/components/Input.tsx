@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: "90%",
     height: 40,
+    color: Colors.black,
   },
   errorText: {
     color: Colors.error,

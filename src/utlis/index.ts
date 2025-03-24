@@ -1,4 +1,5 @@
 import moment from "moment";
+import {PermissionsAndroid} from "react-native";
 
 const today = moment().format("MMMM Do YYYY");
 const firstDayOfWeek = moment().startOf("week").format("YYYY-MM-DD");
@@ -111,5 +112,27 @@ export const onNextOnPrevious = (
           .format("YYYY-MM-DD")
       );
     }
+  }
+};
+
+export const contactPermission = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+      {
+        title: "Contacts Permission",
+        message: "This app needs access to your contacts.",
+        buttonNeutral: "Ask Me Later",
+        buttonNegative: "Cancel",
+        buttonPositive: "OK",
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      return granted;
+    } else {
+      console.log("Contacts permission denied");
+    }
+  } catch (err) {
+    console.warn(err);
   }
 };

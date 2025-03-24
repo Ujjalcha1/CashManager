@@ -1,5 +1,14 @@
-import React, {useState} from "react";
-import {FlatList, StyleSheet, Text, View} from "react-native";
+import React, {useEffect, useState} from "react";
+import {
+  Alert,
+  FlatList,
+  Linking,
+  PermissionsAndroid,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 import FilterOptions from "../../components/FilterOptions";
@@ -12,6 +21,8 @@ import {
   size,
 } from "../../constant";
 import {HomeScreenType} from "../../navigation/navigationTypes";
+import Contacts from "react-native-contacts";
+import {check, PERMISSIONS, request, RESULTS} from "react-native-permissions";
 
 const HomeScreen = (props: HomeScreenType) => {
   const [data, setData] = useState([
@@ -131,6 +142,35 @@ const HomeScreen = (props: HomeScreenType) => {
       cashOut: 20,
     },
   ]);
+
+  useEffect(() => {
+    requestContactsPermission();
+  }, []);
+
+  const requestContactsPermission = async () => {
+    const permission =
+      Platform.OS === "android"
+        ? PERMISSIONS.ANDROID.READ_CONTACTS
+        : PERMISSIONS.IOS.CONTACTS;
+
+    const status = await check(permission);
+
+    if (status === RESULTS.DENIED || status === RESULTS.BLOCKED) {
+      const requestStatus = await request(permission);
+      if (requestStatus !== RESULTS.GRANTED) {
+        throw Error("Permissions not granted to access Contacts");
+      }
+    } else if (status !== RESULTS.GRANTED) {
+      throw Error("Permissions not granted to access Contacts");
+    }
+
+    try {
+      const contacts = await Contacts.getAll();
+      console.log(contacts);
+    } catch (error) {
+      console.error("Failed to fetch contacts:", error);
+    }
+  };
 
   return (
     <Container style={{backgroundColor: Colors.lightWhite}}>
